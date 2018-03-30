@@ -8,9 +8,8 @@ before_script:
 script:
   - docker build -t $DOCKER_USERNAME/htmltest .
   - docker push $DOCKER_USERNAME/htmltest
-  after_success:
-    - docker stop htmltest
-    - docker rm htmltest
-    - docker run -p 8088:80 -d  --name htmltest $DOCKER_USERNAME/htmltest:latest
-  service: docker
-  
+after_success:
+  - docker stop htmltest
+  - docker rm htmltest
+  - docker run -p 8088:80 -d  --name htmltest $DOCKER_USERNAME/htmltest:latest
+service: docker
